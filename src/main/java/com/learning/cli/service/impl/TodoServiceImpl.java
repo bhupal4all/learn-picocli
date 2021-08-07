@@ -163,4 +163,24 @@ public class TodoServiceImpl implements TodoService {
         this.shutdown();
         return Optional.of(todo);
     }
+
+    @Override
+    public List<Todo> findByStatus(List<Status> statuses) {
+        List<Todo> todoList = new ArrayList<>();
+
+        List<Status> statusList = new ArrayList<>();
+
+        if (Objects.nonNull(statuses)) {
+            statusList = statuses;
+        }
+
+        List<Status> finalStatusList = statusList;
+        findAll().forEach(todo -> {
+            if (finalStatusList.contains(todo.getStatus())) {
+                todoList.add(todo);
+            }
+        });
+
+        return todoList;
+    }
 }

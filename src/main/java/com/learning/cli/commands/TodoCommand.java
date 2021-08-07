@@ -28,9 +28,13 @@ public class TodoCommand implements Callable<Integer> {
     final Integer FAILURE = 1;
 
     public static void main(String[] args) {
-        int exitStatus = new CommandLine(new TodoCommand()).execute(
-               "show","--help"
-        );
+        int exitStatus = new CommandLine(new TodoCommand())
+                .setCaseInsensitiveEnumValuesAllowed(true)
+                .execute(
+//                        "list", "--help"
+//                        "list", "--short", "--status=in_progress",
+                        "list", "--no-completed", "--short"
+                );
         System.exit(exitStatus);
     }
 

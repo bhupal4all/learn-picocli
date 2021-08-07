@@ -22,7 +22,7 @@ public class Todo implements Serializable {
 
     @Override
     public String toString() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY/MMM/YY HH:MM");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY/MMM/DD HH:MM");
         return "Todo{" +
                 "id=" + id +
                 ", message='" + message + '\'' +

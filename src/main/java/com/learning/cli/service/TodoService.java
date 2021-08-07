@@ -31,4 +31,5 @@ public interface TodoService {
 
     Optional<Todo> findById(Long id);
 
+    List<Todo> findByStatus(List<Status> statuses);
 }

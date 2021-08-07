@@ -1,9 +1,13 @@
 package com.learning.cli.commands.sub;
 
+import com.learning.cli.service.TodoFactory;
+import com.learning.cli.service.TodoService;
+import com.learning.cli.service.model.Todo;
 import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "add",
@@ -31,11 +35,29 @@ public class AddTodoCommand implements Callable<Integer> {
     )
     Date createdDate;
 
+    TodoService todoService = null;
+
+    public AddTodoCommand() {
+        this.todoService = TodoFactory.getService();
+    }
+
     @Override
     public Integer call() throws Exception {
-        System.out.println("[add] Add Command: ");
-        System.out.println("createdDate = " + createdDate);
-        Arrays.asList(message).forEach(System.out::println);
+
+        if (Objects.isNull(createdDate)) {
+            Arrays.asList(message).stream()
+                    .forEach(todoMessage -> {
+                        Todo todo = this.todoService.createTodo(todoMessage);
+                        System.out.println("todo = " + todo);
+                    });
+        } else {
+            Arrays.asList(message).stream()
+                    .forEach(todoMessage -> {
+                        Todo todo = this.todoService.createTodo(todoMessage, createdDate);
+                        System.out.println("todo = " + todo);
+                    });
+        }
+
         return 0;
     }
 }
