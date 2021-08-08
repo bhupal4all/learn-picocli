@@ -9,6 +9,7 @@ import picocli.CommandLine;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -55,6 +56,14 @@ public class ListTodoCommand implements Callable<Integer> {
     )
     Boolean completed = null;
 
+    @CommandLine.Option(
+            names = {"--id"},
+            description = "Shows the todos for the given ID",
+            required = false,
+            split = ","
+    )
+    Long[] id;
+
     TodoService todoService = null;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
@@ -64,14 +73,15 @@ public class ListTodoCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-
         if (compact) {
             format = ListFormat.SHORT;
         }
 
-        List<Todo> todoList = null;
+        List<Todo> todoList = new ArrayList<>();
 
-        if (Objects.isNull(completed)) {
+        if (Objects.nonNull(id)) {
+            todoList = todoService.findByIds(Arrays.asList(id));
+        } else if (Objects.isNull(completed)) {
             if (Objects.isNull(status)) {
                 todoList = this.todoService.findAll();
             } else {
@@ -90,7 +100,7 @@ public class ListTodoCommand implements Callable<Integer> {
             todoList = this.todoService.findByStatus(statuses);
         }
 
-        if (Objects.nonNull(todoList)) {
+        if (Objects.nonNull(todoList) && todoList.size() > 0) {
             todoList.stream().forEach(todo -> printTodo(format, todo));
         } else {
             System.out.println("No Tasks to display !!!");

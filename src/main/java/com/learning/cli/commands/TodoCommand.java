@@ -1,7 +1,9 @@
 package com.learning.cli.commands;
 
 import com.learning.cli.commands.sub.AddTodoCommand;
+import com.learning.cli.commands.sub.DeleteTodoCommand;
 import com.learning.cli.commands.sub.ListTodoCommand;
+import com.learning.cli.commands.sub.ModifyTodoCommand;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -20,7 +22,9 @@ import java.util.concurrent.Callable;
         commandListHeading = "%nSubCommands are: %n",
         subcommands = {
                 AddTodoCommand.class,
-                ListTodoCommand.class
+                ListTodoCommand.class,
+                ModifyTodoCommand.class,
+                DeleteTodoCommand.class
         }
 )
 public class TodoCommand implements Callable<Integer> {
@@ -30,11 +34,7 @@ public class TodoCommand implements Callable<Integer> {
     public static void main(String[] args) {
         int exitStatus = new CommandLine(new TodoCommand())
                 .setCaseInsensitiveEnumValuesAllowed(true)
-                .execute(
-//                        "list", "--help"
-//                        "list", "--short", "--status=in_progress",
-                        "list", "--no-completed", "--short"
-                );
+                .execute(args);
         System.exit(exitStatus);
     }
 

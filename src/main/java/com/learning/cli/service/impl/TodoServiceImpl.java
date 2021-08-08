@@ -135,7 +135,7 @@ public class TodoServiceImpl implements TodoService {
         List<Todo> todoList = new ArrayList<>();
 
         this.start();
-        ids.stream().map(map::get)
+        todoList = ids.stream().map(map::get)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         this.shutdown();
