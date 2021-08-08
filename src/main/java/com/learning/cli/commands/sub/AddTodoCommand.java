@@ -48,13 +48,13 @@ public class AddTodoCommand implements Callable<Integer> {
             Arrays.asList(message).stream()
                     .forEach(todoMessage -> {
                         Todo todo = this.todoService.createTodo(todoMessage);
-                        System.out.println("todo = " + todo);
+                        System.out.println("New Task ID is " + todo.getId());
                     });
         } else {
             Arrays.asList(message).stream()
                     .forEach(todoMessage -> {
                         Todo todo = this.todoService.createTodo(todoMessage, createdDate);
-                        System.out.println("todo = " + todo);
+                        System.out.println("New Task ID is " + todo.getId());
                     });
         }
 

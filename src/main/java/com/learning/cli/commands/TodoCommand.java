@@ -1,9 +1,6 @@
 package com.learning.cli.commands;
 
-import com.learning.cli.commands.sub.AddTodoCommand;
-import com.learning.cli.commands.sub.DeleteTodoCommand;
-import com.learning.cli.commands.sub.ListTodoCommand;
-import com.learning.cli.commands.sub.ModifyTodoCommand;
+import com.learning.cli.commands.sub.*;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
@@ -24,7 +21,8 @@ import java.util.concurrent.Callable;
                 AddTodoCommand.class,
                 ListTodoCommand.class,
                 ModifyTodoCommand.class,
-                DeleteTodoCommand.class
+                DeleteTodoCommand.class,
+                CompleteTodoCommand.class
         }
 )
 public class TodoCommand implements Callable<Integer> {
