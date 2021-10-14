@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Picocli</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+
+<body>
+
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+		color: blue;
+		opacity: 20%;
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		padding: 10px;
+    }
+    #header-right {
+        position: absolute;
+        top: 0%;
+        right: 0%;
+		color: orange;
+		opacity: 20%;
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		padding: 10px;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+		color: black;
+		opacity: 20%;
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		padding: 10px;
+    }
+
+
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden">
+    <div id="header">
+        <div id="header-left">
+            <p>Java CLI - Picocli</p>
+        </div>
+        <div id="header-right">Doing is Learning...</div>
+        <div id="footer-left">&copy;Ranga Bhupal</div>
+    </div>
+</div>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section data-markdown data-separator="---" data-separator-vertical="--" data-separator-notes="^Note:">
+            <script type="text/template">
+				## Learning Java CLI using Picocli
+				Note:
+				* We will be learning Java CLI using picocli library
+				* Easy to use and easy to program
+				* I am Ranga Bhupal, I will be the instructor for this learning
+				---
+				Picocli is a one-file framework for creating Java command line applications with almost zero code
+				Note:
+				* Using Picocli we can code with ease
+				* almost zero code for
+				  * Parsing input arguments
+				  * Converting input data types
+				  * Help Generation
+				---
+                ### Features
+                * Supports a variety of command line syntax styles including POSIX, GNU, MS-DOS and more
+                * Generates highly customizable usage help
+                * Generates beautiful documentation
+                * Picocli makes it easy to follow Command Line Interface Guidelines
+                * Picocli is licensed under the **Apache License 2.0**.
+				Note:
+				* These a few list of features of picocli library
+            </script>
+        </section>
+
+        <section data-auto-animate>
+            <h2 data-id="code-title">Hello World - Example</h2>
+            <pre data-id="code-animation">
+				<code class="hljs" data-trim data-line-numbers="|4,9,16,22|1,5,9|1-3|5-9|17-21|11-13|">
+					<script type="text/template">
+						@CommandLine.Command(name = "hello",
+							version = "1.0.0",
+							description = "This is a simple Hello Command")
+						public class HelloCommand implements Runnable {
+							@CommandLine.Option(
+								names = {"-u", "--user"},
+								required = false,
+								description = "Provide User Name")
+							String user;
+
+							public static void main(String[] args) {
+								new CommandLine(new HelloCommand()).execute(args);
+							}
+
+							@Override
+							public void run() {
+								if (user == null || user.length() == 0) {
+									System.out.println("[hello] Hello World");
+								} else {
+									System.out.println("[hello] Hello " + user);
+								}
+							}
+						}
+					</script>
+				</code>
+			</pre>
+			<aside class="notes">
+				<ul>
+					<li>This is a sample example for basic need which is Hello Command</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</aside>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'convex', // none/fade/slide/convex/concave/zoom,
+				width: 1080,
+				height: 800,
+				margin: 0.01,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+
+</script>
+
+</body>
+</html>
